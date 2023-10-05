@@ -1,22 +1,65 @@
 body {
     background-color: aliceblue;
+    font-family: sans-serif;
 }
 
 #mainDiv {
     margin: auto;
-    width: 70%;
+    width: max(50%, 600px);
     background-color:#c7e3ff;
     color: black;
-    padding: 5%;
 }
-#mainDiv a {
+a {
     color: red;
 }
 
+#menuTable {
+    width: 100%;
+    background-color: rgba(17, 0, 255, 0.315)
+}
+
 #mainText {
-    padding-top: 80px;
 }
 
 #contactInf {
     padding-top: 80px;
+}
+
+.inlineimg {
+    width: 40%;
+    display: inline-block;
+    padding-right: 2%;
+}
+
+.intextheader {
+    vertical-align: top;
+    text-align: justify;
+    display: inline-block; 
+    margin-top:0px;
+    margin-bottom: 4px;
+    width: 100%;
+}
+
+.intextheader img {
+    float: left;
+}
+
+.intextheader h1 {
+    vertical-align:top; 
+    margin-bottom:3px;
+}
+.intextheader h2 {
+    vertical-align:top; 
+    display: inline-block; 
+    margin-bottom:2px;
+}
+
+.frontImage {
+    width: 100%;
+}
+
+#mainPadded {
+    padding-left: 2%;
+    padding-right: 2%;
+    padding-bottom: 2%;
 }
