@@ -1,0 +1,22 @@
+body {
+    background-color: aliceblue;
+}
+
+#mainDiv {
+    margin: auto;
+    width: 70%;
+    background-color:#c7e3ff;
+    color: black;
+    padding: 5%;
+}
+#mainDiv a {
+    color: red;
+}
+
+#mainText {
+    padding-top: 80px;
+}
+
+#contactInf {
+    padding-top: 80px;
+}
