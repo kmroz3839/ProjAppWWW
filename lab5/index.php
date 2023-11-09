@@ -27,12 +27,27 @@
 
             <?php
                 if (array_key_exists('p', $_GET)){
-                    if ($_GET['p'] == 1){
-                        include 'html/p1.php'
+                    $pIndex = $_GET['p'];
+                    if ($pIndex == 1){
+                        include 'html/p1.html';
+                    }
+                    elseif ($pIndex == 2){
+                        include 'html/p2.html';
+                    } 
+                    elseif ($pIndex == 3){
+                        include 'html/p3.html';
+                    }
+                    elseif ($pIndex == 4){
+                        include 'html/p4.html';
+                    }
+                    elseif ($pIndex == 5){
+                        include 'html/p5.html';
                     }
                 } else {
-                    include 'html/mainpage.php'
+                    include 'html/mainpage.html';
                 }
+
+                include 'subcontactinf.html';
             ?>
         </div>
         

@@ -19,28 +19,9 @@
             <button onclick="changeBackground('#302417')">Ciemny (brązowy)</button>
         </aside>
         <div id="mainDiv"> 
-            <table id="menuTable">
-                <tr>
-                    <td>
-                        <a href="../index.php">Strona główna</a>
-                    </td>
-                    <td>
-                        <a href="../html/p1.php">Procesory</a>
-                    </td>
-                    <td >
-                        <a href="../html/p2.php">Karty graficzne</a>
-                    </td>
-                    <td>
-                        <a href="../html/p3.php">Karty muzyczne</a>
-                    </td>
-                    <td>
-                        <a href="../html/p4.php">Laptopy</a>
-                    </td>
-                    <td style="background-color:rgb(0, 0, 53); color:white;">
-                        Strona testowa
-                    </td>
-                </tr>
-            </table>
+            <?php
+                include '../subnavbar.html';
+            ?>
             <br>
             <div id="mainPadded">
                 <h1>Strona testowa</h1>
