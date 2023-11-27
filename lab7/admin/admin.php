@@ -113,6 +113,11 @@ function DodajPodstrone(){
     echo $wynik;
 }
 
+function UsunPodstrone($index){
+    $delquery = 'DELETE FROM `page_list` WHERE `id` = '.$index.' LIMIT 1;';
+    mysqli_query($GLOBALS['link'], $delquery);
+}
+
 function ListaPodstron(){
 
     echo '<h2>Lista podstron</h2>';
@@ -121,7 +126,7 @@ function ListaPodstron(){
     $result = mysqli_query($GLOBALS['link'], $query);
     
     while ($row = mysqli_fetch_array($result)){
-        echo $row['id'].' '.$row['page_title'].'<a href=admin.php?p=edit&editpage='.$row['id'].'>Edytuj</a> <br/>';
+        echo $row['id'].' '.$row['page_title'].'<a href=admin.php?p=edit&editpage='.$row['id'].'>Edytuj</a> <a href=admin.php?p=delete&page='.$row['id'].'>Usuń</a> <br/>';
     }
     echo '<br>';
     echo '<a href="admin.php?p=addsubpage">Dodaj podstronę</a>';
@@ -146,6 +151,9 @@ function ListaPodstron(){
                         EdytujPodstrone($_GET['editpage']);
                     } elseif ($_GET['p'] == "addsubpage"){
                         DodajPodstrone();
+                    } elseif ($_GET['p'] == "delete") {
+                        echo "Usunięto podstronę.";
+                        UsunPodstrone($_GET['page']);
                     }
                     else {
                         echo 'Admin start page';
