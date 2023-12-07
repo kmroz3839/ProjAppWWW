@@ -102,7 +102,7 @@ function DodajPodstrone(){
             Zawartość:
             <br>
             <textarea name="page_content">
-            
+
             </textarea>
             <br>
             <input type="submit" name="add_submit" value="Dodaj" />

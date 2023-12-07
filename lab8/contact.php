@@ -38,7 +38,18 @@ function WyslijMailKontakt($odbiorca){
         echo '[wiadomosc_wyslana]';
     }
 }
-function PrzypomnijHaslo(){
+function PrzypomnijHaslo($odbiorca){
+        $mail['subject'] = 'Przypomnienie hasła';
+        $mail['body'] = 'Hasło do admina to "admin".';
+        $mail['sender'] = '127.0.0.1';
+        $mail['recipient'] = $odbiorca;
+
+        $header  = 'From: Formularz kontaktowy <'.$mail['sender'].'>\n';
+        $header .= 'MIME-Version: 1.0\nContent-Type: text/plain; charset=utf-8\nContent-Transfer-Encoding: utf-8\n';
+        $header .= 'X-Sender <'.$mail['sender'].'>\n';
+        $header .= 'X-Mailer: PRapWWW mail 1.2\n';
+        $header .= 'X-Priority: 3\n';
+        $header .= 'Return-Path: <'.$mail['sender'].'>\n';
 
 }
 
