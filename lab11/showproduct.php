@@ -21,6 +21,7 @@
             Data utworzenia: '.$r['data_utworzenia'].'<br>
             Data modyfikacji: '.$r['data_modyfikacji'].'<br>
             Data wygaśnięcia: '.$r['data_wygasniecia'].'<br>
+            Gabaryt: '.$r['gabaryt_produktu'].'<br>
 
 
         ';
