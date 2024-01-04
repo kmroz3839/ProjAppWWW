@@ -4,8 +4,8 @@
 
     // Function to insert a new record
     function insertRecord($tytul, $opis, $cena_netto, $podatek_vat, $ilosc_dostepnych, $status_dostepnosci, $kategoria, $gabaryt_produktu, $zdjecie) {
-        $query = "INSERT INTO produkty (tytul, opis, cena_netto, podatek_vat, ilosc_dostepnych, status_dostepnosci, kategoria, gabaryt_produktu, zdjecie) 
-                VALUES ('$tytul', '$opis', '$cena_netto', '$podatek_vat', '$ilosc_dostepnych', '$status_dostepnosci', '$kategoria', '$gabaryt_produktu', '$zdjecie')";
+        $query = "INSERT INTO produkty (tytul, opis, data_utworzenia, data_modyfikacji, data_wygasniecia, cena_netto, podatek_vat, ilosc_dostepnych, status_dostepnosci, kategoria, gabaryt_produktu, zdjecie) 
+                VALUES ('$tytul', '$opis', now(), now(), DATE_ADD(now(), interval 2 month), '$cena_netto', '$podatek_vat', '$ilosc_dostepnych', '$status_dostepnosci', '$kategoria', '$gabaryt_produktu', '$zdjecie')";
 
         global $link;
         mysqli_query($link, $query);
@@ -29,9 +29,8 @@
         mysqli_query($link, $query);
     }
 
-    // Function to retrieve all records
     function getAllRecords() {
-        $query = "SELECT * FROM produkty";
+        $query = 'SELECT * FROM `produkty`';
 
         global $link;
         $result = mysqli_query($link, $query);
@@ -44,7 +43,6 @@
         return $records;
     }
 
-// Function to handle POST request
     function handlePostRequest() {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if (isset($_POST['add'])) {
@@ -123,21 +121,29 @@ handlePostRequest();
         <?php
             $allRecords = getAllRecords();
             foreach ($allRecords as $record) {
+                global $link;
                 echo "<tr>";
-                echo "<td>{$record['id']}</td>";
-                echo "<td>{$record['tytul']}</td>";
-                echo "<td>{$record['opis']}</td>";
-                echo "<td>{$record['data_utworzenia']}</td>";
-                echo "<td>{$record['data_modyfikacji']}</td>";
-                echo "<td>{$record['data_wygasniecia']}</td>";
-                echo "<td>{$record['cena_netto']}</td>";
-                echo "<td>{$record['podatek_vat']}</td>";
-                echo "<td>{$record['ilosc_dostepnych']}</td>";
-                echo "<td>{$record['status_dostepnosci']}</td>";
-                echo "<td>{$record['kategoria']}</td>";
-                echo "<td>{$record['gabaryt_produktu']}</td>";
-                echo "<td>{$record['zdjecie']}</td>";
-                echo "</tr>";
+                $cat_query = 'SELECT * FROM `kategorie` WHERE id = '.$record['kategoria'];
+                $result = mysqli_query($link, $cat_query);
+                $cat = mysqli_fetch_assoc($result);
+                echo '<td>'.$record['id'].'</td>';
+                echo '<td>'.$record['tytul'].'</td>';
+                echo '<td>'.$record['opis'].'</td>';
+                echo '<td>'.$record['data_utworzenia'].'</td>';
+                echo '<td>'.$record['data_modyfikacji'].'</td>';
+                echo '<td>'.$record['data_wygasniecia'].'</td>';
+                echo '<td>'.$record['cena_netto'].'</td>';
+                echo '<td>'.$record['podatek_vat'].'</td>';
+                echo '<td>'.$record['ilosc_dostepnych'].'</td>';
+                echo '<td>'.$record['status_dostepnosci'].'</td>';
+                if ($cat == null) {
+                    echo '<td>'.$record['kategoria'].'</td>';
+                } else {
+                    echo '<td>'.$cat['name'].'</td>';
+                }
+                echo '<td>'.$record['gabaryt_produktu'].'</td>';
+                echo '<td><img style="height:80px; width: 200px;" src='.$record['zdjecie'].'></img></td>';
+                echo '</tr>';
             }
         ?>
     </table>
@@ -178,7 +184,7 @@ handlePostRequest();
     </form>
 
     <h2>Delete Entry</h2>
-    <form action="your_php_script.php" method="post">
+    <form method="post">
         <label for="idToDelete">ID to Delete:</label>
         <input type="text" name="idToDelete" required><br>
 

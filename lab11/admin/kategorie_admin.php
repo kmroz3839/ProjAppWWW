@@ -1,5 +1,5 @@
 <?php
-    include "db/dbconfig.php";
+    include "../db/dbconfig.php";
 
     if ($_SERVER['REQUEST_METHOD'] == "POST"){
         if (isset($_POST['btn_newcat_submit'])){
