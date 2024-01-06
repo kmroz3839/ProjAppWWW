@@ -19,6 +19,7 @@
             <br><br>
             <h2>Cena: '.($r['cena_netto']+$r['podatek_vat']).' zł</h2>
             <form method="POST">
+                <input type="number" name="cart_count" min=1 value="1"></input>
                 <input type="submit" name="cart_add" value="Dodaj do koszyka"></input>
             </form>
             <h4>Szczegóły:</h4>
