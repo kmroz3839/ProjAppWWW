@@ -1,5 +1,6 @@
 <?php
     include 'db/dbconfig.php';
+    include "db/s_koszyk.php";
 
     function insertRecord($tytul, $opis, $cena_netto, $podatek_vat, $ilosc_dostepnych, $status_dostepnosci, $kategoria, $gabaryt_produktu, $zdjecie) {
         $query = "INSERT INTO produkty (tytul, opis, data_utworzenia, data_modyfikacji, data_wygasniecia, cena_netto, podatek_vat, ilosc_dostepnych, status_dostepnosci, kategoria, gabaryt_produktu, zdjecie) 
@@ -40,7 +41,7 @@
     }
 
     function handlePost() {
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             if (isset($_POST['add'])) {
                 $tytul = $_POST['tytul'];
                 $opis = $_POST['opis'];
@@ -75,6 +76,10 @@
     <title>Manage Products</title>
 </head>
 <body>
+
+    <?php
+        echo dbg_printCart();
+    ?>
 
     <table style="border: 1px solid black;">
         <tr>

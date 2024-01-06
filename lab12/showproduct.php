@@ -1,5 +1,6 @@
 <?php
     include "db/dbconfig.php";
+    include "db/s_koszyk.php";
 
     function PokazProdukt(){
         $id = $_GET['id'];
@@ -17,6 +18,9 @@
             <p>'.$r['opis'].'</p>
             <br><br>
             <h2>Cena: '.($r['cena_netto']+$r['podatek_vat']).' zł</h2>
+            <form method="POST">
+                <input type="submit" name="cart_add" value="Dodaj do koszyka"></input>
+            </form>
             <h4>Szczegóły:</h4>
             Data utworzenia: '.$r['data_utworzenia'].'<br>
             Data modyfikacji: '.$r['data_modyfikacji'].'<br>
@@ -34,6 +38,8 @@
     </head>
     <body>
         <?php
+            echo dbg_printCart();
+
             echo PokazProdukt();
         ?>
     </body>
