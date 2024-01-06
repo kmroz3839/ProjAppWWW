@@ -12,6 +12,9 @@
             if (isset($_POST['cart_add']) && isset($_GET['id'])) {
                 addToCart($_GET['id']);
             }
+            elseif (isset($_POST['cart_wipe'])) {
+                $_SESSION['cart'] = [];
+            }
         }
     }
 
