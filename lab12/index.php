@@ -54,13 +54,10 @@
                 $zdjecie = $_POST['zdjecie'];
 
                 insertRecord($tytul, $opis, $cena_netto, $podatek_vat, $ilosc_dostepnych, $status_dostepnosci, $kategoria, $gabaryt_produktu, $zdjecie);
-                exit();
             } elseif (isset($_POST['delete'])) {
                 $idToDelete = $_POST['idToDelete'];
 
                 deleteRecord($idToDelete);
-                header('Location: your_page.php');
-                exit();
             }
         }
     }
