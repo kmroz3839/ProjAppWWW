@@ -3,10 +3,10 @@
         foreach ($_SESSION['cart'] as $k => $cartentry){
             if ($cartentry[0] == $id){
                 $_SESSION['cart'][$k][1] += $count;
+                return;
             }
-            return;
         }
-        $_SESSION['cart'][] = [$id, 1];
+        $_SESSION['cart'][] = [$id, $count];
     }
     function removeFromCart($id) {
         foreach ($_SESSION['cart'] as $k => $cartentry){
