@@ -20,7 +20,8 @@
     }
 
     function dbg_printCart(){
-        return print_r($_SESSION['cart'], true);
+        echo '<a href="koszyk.php">Koszyk</a>';
+        #return print_r($_SESSION['cart'], true);
     }
 
     function handleCartPost() {
