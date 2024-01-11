@@ -13,7 +13,7 @@
             $plink = '<h2>Produkt niedostępny</h2>';
         } else {
             $plink = '<form method="POST">
-            <input type="number" name="cart_count" min=1 value="1"></input>
+            <input type="number" name="cart_count" min=1 max='.$r['ilosc_dostepnych'].' value="1"></input>
             <input type="submit" name="cart_add" value="Dodaj do koszyka"></input>
             </form>';
         }
@@ -30,6 +30,7 @@
             <h2>Cena: '.($r['cena_netto']+$r['podatek_vat']).' zł</h2>
             '.$plink.'
             <h4>Szczegóły:</h4>
+            Ilość dostępnych: '.$r['ilosc_dostepnych'].'<br>
             Data utworzenia: '.$r['data_utworzenia'].'<br>
             Data modyfikacji: '.$r['data_modyfikacji'].'<br>
             Data wygaśnięcia: '.$r['data_wygasniecia'].'<br>
