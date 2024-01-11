@@ -101,7 +101,7 @@
                 } else {
                     echo '<td>'.$cat['name'].'</td>';
                 }
-                echo '<td><img style="height:80px; width: 200px;" src='.$record['zdjecie'].'></img></td>';
+                echo '<td><img style=" width: 200px;" src='.$record['zdjecie'].'></img></td>';
                 echo '<td><a href="showproduct.php?id='.$record['id'].'">Pokaż</a></td>';
                 echo '</tr>';
             }
