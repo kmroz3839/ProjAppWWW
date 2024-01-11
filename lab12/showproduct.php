@@ -15,7 +15,7 @@
             $plink = '<form method="POST">
             <input type="number" name="cart_count" min=1 value="1"></input>
             <input type="submit" name="cart_add" value="Dodaj do koszyka"></input>
-        </form>';
+            </form>';
         }
 
         return '
