@@ -33,7 +33,7 @@
 
             $contenthtml .= 
             '<div>
-                <h3>'.$row['name'].'
+                <h3>'.$row['name'].' (id '.$row['id'].')
                     '.$editpanel.'
                 </h3>
                 <div style="margin-left: 30px;">
