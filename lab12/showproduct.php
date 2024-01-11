@@ -8,6 +8,16 @@
         $res = mysqli_query($GLOBALS['link'], $query);
         $r = mysqli_fetch_array($res);
 
+        $plink = '';
+        if ($r['status_dostepnosci'] == 0){
+            $plink = '<h2>Produkt niedostępny</h2>';
+        } else {
+            $plink = '<form method="POST">
+            <input type="number" name="cart_count" min=1 value="1"></input>
+            <input type="submit" name="cart_add" value="Dodaj do koszyka"></input>
+        </form>';
+        }
+
         return '
             <h1>'.$r['tytul'].'</h1>
             <br>
@@ -18,10 +28,7 @@
             <p>'.$r['opis'].'</p>
             <br><br>
             <h2>Cena: '.($r['cena_netto']+$r['podatek_vat']).' zł</h2>
-            <form method="POST">
-                <input type="number" name="cart_count" min=1 value="1"></input>
-                <input type="submit" name="cart_add" value="Dodaj do koszyka"></input>
-            </form>
+            '.$plink.'
             <h4>Szczegóły:</h4>
             Data utworzenia: '.$r['data_utworzenia'].'<br>
             Data modyfikacji: '.$r['data_modyfikacji'].'<br>
