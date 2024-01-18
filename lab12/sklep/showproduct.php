@@ -21,7 +21,7 @@
         return '
             <h1>'.$r['tytul'].'</h1>
             <br>
-            <img src='.$r['zdjecie'].'></img>
+            <img id=frontImg src='.$r['zdjecie'].'></img>
             <br>
             <h3>Opis:</h3>
             <br>
@@ -43,13 +43,15 @@
 
 <html>
     <head>
-    
+        <link rel="stylesheet" href="css/showproduct.css"></link>
     </head>
     <body>
-        <?php
-            echo dbg_printCart();
+        <div class="center">
+            <?php
+                echo dbg_printCart();
 
-            echo PokazProdukt();
-        ?>
+                echo PokazProdukt();
+            ?>
+        </div>
     </body>
 </html>
