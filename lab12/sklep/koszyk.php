@@ -5,6 +5,7 @@
 
 <html>
     <head>
+        <link rel="stylesheet" href="css/showproduct.css"></link>
     </head>
     <body>
         <h1>Koszyk</h1>

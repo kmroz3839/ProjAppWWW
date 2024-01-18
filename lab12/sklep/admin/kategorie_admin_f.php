@@ -3,8 +3,9 @@
 class CategoryRenderer {
 
     public $canedit = false;
+    public $redirects = false;
 
-    public function RenderujKategorie($id){
+    public function RenderujKategorie($id, $layer = 0){
         $query = 'SELECT * FROM `kategorie` WHERE `parent` = '.$id;
         $result = mysqli_query($GLOBALS['link'], $query);
         $contenthtml = '';
@@ -31,13 +32,21 @@ class CategoryRenderer {
                 $addformpanel = '';
             }
 
+            $pagename = $row['name'].' (id '.$row['id'].')';
+            if ($this->redirects){
+                $pagename = '<a href="?kat_id='.$row['id'].'">'.$pagename.'</a>';
+            }
+            for ($i = 0; $i < $layer; $i++){
+                $pagename = "\u{2501} ".$pagename;
+            }
+
             $contenthtml .= 
             '<div>
-                <h3><a href="?kat_id='.$row['id'].'">'.$row['name'].' (id '.$row['id'].')</a>
+                <h3>'.$pagename.'
                     '.$editpanel.'
                 </h3>
-                <div style="margin-left: 30px;">
-                    '.$this->RenderujKategorie($row['id']).'
+                <div style="margin-left: 20px;">
+                    '.$this->RenderujKategorie($row['id'], $layer+1).'
                     '.$addformpanel.'
                 </div>
             </div>';

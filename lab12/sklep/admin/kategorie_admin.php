@@ -36,12 +36,12 @@
 
 <html>
     <head>
-
+        <link rel="stylesheet" href="../css/showproduct.css"></link>
     </head>
     <body>
         <h1>Kategorie</h1>
         <?php
-            echo $catRenderer->PokazKategorie(true);
+            echo $catRenderer->PokazKategorie();
         ?>
     </body>
 </html>

@@ -1,8 +1,12 @@
 body {
     font-family: 'Helvetica';
-    margin: auto;
 }
 
 #frontImg {
     height: 400px;
+}
+
+.center{
+    margin: auto;
+    text-align: center;
 }

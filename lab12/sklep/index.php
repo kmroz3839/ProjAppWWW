@@ -5,10 +5,11 @@
 
     $catRenderer = new CategoryRenderer();
     $catRenderer->canedit = false;
+    $catRenderer->redirects = true;
 
     function insertRecord($tytul, $opis, $cena_netto, $podatek_vat, $ilosc_dostepnych, $status_dostepnosci, $kategoria, $gabaryt_produktu, $zdjecie) {
         $query = "INSERT INTO produkty (tytul, opis, data_utworzenia, data_modyfikacji, data_wygasniecia, cena_netto, podatek_vat, ilosc_dostepnych, status_dostepnosci, kategoria, gabaryt_produktu, zdjecie) 
-                VALUES ('$tytul', '$opis', now(), now(), DATE_ADD(now(), interval 2 month), '$cena_netto', '$podatek_vat', '$ilosc_dostepnych', '$status_dostepnosci', '$kategoria', '$gabaryt_produktu', '$zdjecie')";
+                VALUES ('$tytul', '$opis', now(), now(), DATE_ADD(now(), interval 2 month), '$cena_netto', '$podatek_vat', '$ilosc_dostepnych', 1, '$kategoria', '$gabaryt_produktu', '$zdjecie')";
 
         global $link;
         mysqli_query($link, $query);
@@ -55,12 +56,11 @@
                 $cena_netto = $_POST['cena_netto'];
                 $podatek_vat = $_POST['podatek_vat'];
                 $ilosc_dostepnych = $_POST['ilosc_dostepnych'];
-                $status_dostepnosci = $_POST['status_dostepnosci'];
                 $kategoria = $_POST['kategoria'];
                 $gabaryt_produktu = $_POST['gabaryt_produktu'];
                 $zdjecie = $_POST['zdjecie'];
 
-                insertRecord($tytul, $opis, $cena_netto, $podatek_vat, $ilosc_dostepnych, $status_dostepnosci, $kategoria, $gabaryt_produktu, $zdjecie);
+                insertRecord($tytul, $opis, $cena_netto, $podatek_vat, $ilosc_dostepnych, 1, $kategoria, $gabaryt_produktu, $zdjecie);
             } elseif (isset($_POST['delete'])) {
                 $idToDelete = $_POST['idToDelete'];
 
@@ -146,8 +146,6 @@
             <label for="ilosc_dostepnych">Ilość dostępnych:</label>
             <input type="text" name="ilosc_dostepnych" required><br>
 
-            <label for="status_dostepnosci">Status dostępności:</label>
-            <input type="text" name="status_dostepnosci" required><br>
 
             <label for="kategoria">Kategoria:</label>
             <input type="text" name="kategoria" required><br>
