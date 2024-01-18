@@ -1,0 +1,42 @@
+body {
+    font-family: 'Helvetica';
+}
+
+h1 {
+    text-align: center;
+    font-size: 50px;
+}
+h2 {
+    text-align: center;
+    font-size: 40px;
+}
+
+
+.listaProduktow {
+    float:right;
+    width: 75%;
+}
+
+.listaProduktow table {
+    width: max(75%, 500px);
+    margin: auto;
+}
+
+.listaProduktow table img {
+    margin: auto;
+    height: 200px;
+}
+.listaProduktow table th {
+    font-size: 40px;
+}
+.listaProduktow table tr {
+    font-size: 20px;
+    text-align: center;
+}
+.listaProduktow table td {
+    border: 1px solid black;
+}
+
+.pageleft {
+    float: left;
+}

@@ -1,6 +1,10 @@
 <?php
     include 'db/dbconfig.php';
     include "db/s_koszyk.php";
+    include "admin/kategorie_admin_f.php";
+
+    $catRenderer = new CategoryRenderer();
+    $catRenderer->canedit = false;
 
     function insertRecord($tytul, $opis, $cena_netto, $podatek_vat, $ilosc_dostepnych, $status_dostepnosci, $kategoria, $gabaryt_produktu, $zdjecie) {
         $query = "INSERT INTO produkty (tytul, opis, data_utworzenia, data_modyfikacji, data_wygasniecia, cena_netto, podatek_vat, ilosc_dostepnych, status_dostepnosci, kategoria, gabaryt_produktu, zdjecie) 
@@ -28,6 +32,9 @@
 
     function getAllRecords() {
         $query = 'SELECT * FROM `produkty`';
+        if (isset($_GET['kat_id'])){
+            $query = 'SELECT * FROM `produkty` WHERE `kategoria` = '.$_GET['kat_id'];
+        }
 
         global $link;
         $result = mysqli_query($link, $query);
@@ -71,6 +78,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Manage Products</title>
+    <link rel="stylesheet" href="css/sklep.css"></link>
 </head>
 <body>
 
@@ -78,78 +86,89 @@
         echo dbg_printCart();
     ?>
 
-    <table style="border: 1px solid black;">
-        <tr>
-            <th>ID</th>
-            <th>Tytuł</th>
-            <th>Kategoria</th>
-            <th>Zdjęcie</th>
-            <th>Link</th>
-        </tr>
-        <?php
-            $allRecords = getAllRecords();
-            foreach ($allRecords as $record) {
-                global $link;
-                echo "<tr>";
-                $cat_query = 'SELECT * FROM `kategorie` WHERE id = '.$record['kategoria'];
-                $result = mysqli_query($link, $cat_query);
-                $cat = mysqli_fetch_assoc($result);
-                echo '<td>'.$record['id'].'</td>';
-                echo '<td>'.$record['tytul'].'</td>';
-                if ($cat == null) {
-                    echo '<td>'.$record['kategoria'].'</td>';
-                } else {
-                    echo '<td>'.$cat['name'].'</td>';
+    <div class="listaProduktow">
+        <h1>Produkty</h1>
+        <table style="border: 1px solid black;">
+            <tr>
+                <th>ID</th>
+                <th>Tytuł</th>
+                <th>Kategoria</th>
+                <th>Zdjęcie</th>
+                <th>Link</th>
+            </tr>
+            <?php
+                $allRecords = getAllRecords();
+                foreach ($allRecords as $record) {
+                    global $link;
+                    echo "<tr>";
+                    $cat_query = 'SELECT * FROM `kategorie` WHERE id = '.$record['kategoria'];
+                    $result = mysqli_query($link, $cat_query);
+                    $cat = mysqli_fetch_assoc($result);
+                    echo '<td>'.$record['id'].'</td>';
+                    echo '<td>'.$record['tytul'].'</td>';
+                    if ($cat == null) {
+                        echo '<td>'.$record['kategoria'].'</td>';
+                    } else {
+                        echo '<td>'.$cat['name'].'</td>';
+                    }
+                    echo '<td><img src='.$record['zdjecie'].'></img></td>';
+                    echo '<td><a href="showproduct.php?id='.$record['id'].'">Pokaż</a></td>';
+                    echo '</tr>';
                 }
-                echo '<td><img style=" width: 200px;" src='.$record['zdjecie'].'></img></td>';
-                echo '<td><a href="showproduct.php?id='.$record['id'].'">Pokaż</a></td>';
-                echo '</tr>';
-            }
-        ?>
-    </table>
+            ?>
+        </table>
+    </div>
 
     <br>
     <br>
 
-    <h2>Dodaj produkt</h2>
-    <form method="post">
-        <label for="tytul">Tytuł:</label>
-        <input type="text" name="tytul" required><br>
+    <h2>Kategorie</h2>
+    <?php
+    echo $catRenderer->PokazKategorie();
+    ?>
+    <br><br>
 
-        <label for="opis">Opis:</label>
-        <textarea name="opis" required></textarea><br>
+    <div class="pageleft">
+        <h2>Dodaj produkt</h2>
+        <form method="post">
+            <label for="tytul">Tytuł:</label>
+            <input type="text" name="tytul" required><br>
 
-        <label for="cena_netto">Cena netto:</label>
-        <input type="text" name="cena_netto" required><br>
+            <label for="opis">Opis:</label>
+            <textarea name="opis" required></textarea><br>
 
-        <label for="podatek_vat">Podatek VAT:</label>
-        <input type="text" name="podatek_vat" required><br>
+            <label for="cena_netto">Cena netto:</label>
+            <input type="text" name="cena_netto" required><br>
 
-        <label for="ilosc_dostepnych">Ilość dostępnych:</label>
-        <input type="text" name="ilosc_dostepnych" required><br>
+            <label for="podatek_vat">Podatek VAT:</label>
+            <input type="text" name="podatek_vat" required><br>
 
-        <label for="status_dostepnosci">Status dostępności:</label>
-        <input type="text" name="status_dostepnosci" required><br>
+            <label for="ilosc_dostepnych">Ilość dostępnych:</label>
+            <input type="text" name="ilosc_dostepnych" required><br>
 
-        <label for="kategoria">Kategoria:</label>
-        <input type="text" name="kategoria" required><br>
+            <label for="status_dostepnosci">Status dostępności:</label>
+            <input type="text" name="status_dostepnosci" required><br>
 
-        <label for="gabaryt_produktu">Gabaryt produktu:</label>
-        <input type="text" name="gabaryt_produktu" required><br>
+            <label for="kategoria">Kategoria:</label>
+            <input type="text" name="kategoria" required><br>
 
-        <label for="zdjecie">Zdjęcie:</label>
-        <input type="text" name="zdjecie" required><br>
+            <label for="gabaryt_produktu">Gabaryt produktu:</label>
+            <input type="text" name="gabaryt_produktu" required><br>
 
-        <button type="submit" name="add">Dodaj</button>
-    </form>
+            <label for="zdjecie">Zdjęcie:</label>
+            <input type="text" name="zdjecie" required><br>
 
-    <h2>Usuń produkt</h2>
-    <form method="post">
-        <label for="idToDelete">ID produktu:</label>
-        <input type="text" name="idToDelete" required><br>
+            <button type="submit" name="add">Dodaj</button>
+        </form>
 
-        <button type="submit" name="delete">Usuń</button>
-    </form>
+        <h2>Usuń produkt</h2>
+        <form method="post">
+            <label for="idToDelete">ID produktu:</label>
+            <input type="text" name="idToDelete" required><br>
+
+            <button type="submit" name="delete">Usuń</button>
+        </form>
+    </div>
 
 </body>
 </html>
