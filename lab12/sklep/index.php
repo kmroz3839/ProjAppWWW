@@ -153,7 +153,7 @@
             <label for="gabaryt_produktu">Gabaryt produktu:</label>
             <input type="text" name="gabaryt_produktu" required><br>
 
-            <label for="zdjecie">Zdjęcie:</label>
+            <label for="zdjecie">Zdjęcie (link):</label>
             <input type="text" name="zdjecie" required><br>
 
             <button type="submit" name="add">Dodaj</button>
